@@ -1,0 +1,16 @@
+@font-face{
+	font-family:noto;
+	src: url('../assets/fonts/NotoSans-Regular.ttf');
+}
+body{
+font-family: noto;
+}
+p{
+	font-size:1em;
+}
+input{
+	font-family: noto;
+}
+button{
+	font-family: noto;
+}

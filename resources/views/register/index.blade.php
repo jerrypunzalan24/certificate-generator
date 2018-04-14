@@ -1,10 +1,7 @@
-<?php 
-include_once('../connectDB.php');
-?>
 <head>
-	<link rel = 'stylesheet' href = '../font-awesome-4.7.0/font-awesome.min.css'/>
-	<link rel = 'stylesheet' href = '../css/bootstrap.min.css'/>
-	<link rel ='stylesheet' href = '../css/styles.css'/> 
+	<link rel = 'stylesheet' href = '/font-awesome-4.7.0/font-awesome.min.css'/>
+	<link rel = 'stylesheet' href = '/css/bootstrap.min.css'/>
+	<link rel ='stylesheet' href = '/css/styles.css'/> 
 </head>
 <style>
 .lead{
@@ -66,6 +63,7 @@ button:hover{
 				<h4 class ='header'>Personal Information</h4>
 				<hr/>
 				<form method = 'post' id = 'submit-form' >
+					{{ csrf_field() }}
 					<div class ='row'>
 						<div class ='col-md-5'>
 							<div class ='form-group'>
@@ -115,20 +113,24 @@ button:hover{
 		</div>
 	</div>
 </body>
-<script src = '../js/jquery/jquery-3.2.1.min.js' ></script>
-<script src ='../js/bootstrap.min.js'></script>
+<script src = '/js/jquery/jquery-3.2.1.min.js' ></script>
+<script src ='/js/bootstrap.min.js'></script>
 <script>
 	$('#submit-form').submit(function(e){
 		e.preventDefault()
 		$('#disclaimer').modal('show')
 		$.ajax({
-			url:'../process/',
+			url:'/addparticipant',
 			type: 'POST',
 			data: $(this).serialize(),
-			success:function(html){
+			success:function(html){	
+			console.log(html) 
 				$('#modal-title').html(`Welcome, ${$('input[name=fname]').val()}`)
 				$('input').val("") 
 			},
+			error: function(html){
+				console.log(html)
+			}
 		})
 	})
 </script>

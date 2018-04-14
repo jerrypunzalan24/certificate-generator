@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/register','RegisterController@index');
+Route::post('/addparticipant', 'AjaxController@addparticipant');
+Route::get('/templates', 'TemplateController@index');
+Route::get('/edit', 'GenerateController@edit');
+Route::get('/generate/{id}','GenerateController@view');

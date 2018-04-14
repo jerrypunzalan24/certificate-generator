@@ -1,6 +1,4 @@
-<?php include_once('../connectDB.php');
-$query = mysqli_query($con, "SELECT * FROM data ORDER BY id DESC");
-?>
+
 <table class = 'table  table-bordered' >
 	<thead  style ='border-bottom:none'>
 		<th style = 'font-weight: bold; background-color: #F9F9F9' >Full Name</th>
@@ -8,12 +6,12 @@ $query = mysqli_query($con, "SELECT * FROM data ORDER BY id DESC");
 		<th style ='font-weight:bold; background-color: #F9F9F9'>Action</th>
 	</thead>
 	<div style ='max-height:400px;  overflow-x: hidden;overflow-y:scroll;'>
-		<?php while($row = mysqli_fetch_assoc($query)){?>
+		@foreach($users as $user)
 		<tr>
-			<td><?= strtoupper($row['last_name']) .", {$row['first_name']} {$row['middle_initial']}" ?></td>
-			<td><?= $row['school'] ?></td>
-			<td><a class ='btn btn-success btn-block' href = '/attendance-system/generate?id=<?=$row['id']?>'>Print</a></td>
+			<td> {{strtoupper($user->last_name)}}, {{$user->first_name}} {{$user->middle_initial}}</td>
+			<td>{{ $user->school }}</td>
+			<td><a class ='btn btn-success btn-block' href = "/generate/{{$user->id}}">Print</a></td>
 		</tr>
-		<?php } ?>
+		@endforeach
 	</tbody>
 </table>

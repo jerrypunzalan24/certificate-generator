@@ -1,6 +1,4 @@
-<?php 
-include_once('../connectDB.php');
-?>
+
 <head>
 	<link rel = 'stylesheet' href = '../font-awesome-4.7.0/font-awesome.min.css'/>
 	<link rel = 'stylesheet' href = '../css/bootstrap.min.css'/>
@@ -31,10 +29,10 @@ sup{
 						<h4 class ='header' style ='margin-top:5px'>Registered Participants</h4>
 					</div>
 					<div class = 'col-md-2' style ='padding-right:1px'>
-						<a href = '/attendance-system/generatereport/' class ='btn btn-success btn-block'>View reports</a>
+						<a href = '/generatereport' class ='btn btn-success btn-block'>View reports</a>
 					</div>
 					<div class = 'col-md-2' style ='padding-left:5px'>
-						<a href = '/attendance-system/generate/?all=' class ='btn btn-success btn-block'>Print all</a>
+						<a href = '/generate/all' class ='btn btn-success btn-block'>Print all</a>
 					</div>
 					<div class = 'col-md-4' style ='padding-left:5px'>
 						<input type ='text' class ='form-control' name ='search' placeholder ='Search'/>
@@ -70,7 +68,7 @@ sup{
 		$('#content').load('getparticipants.php')
 		setInterval(function(){
 			if(autoupdate){
-				$('#content').load('getparticipants.php')
+				$('#content').load('/getparticipants')
 			}
 		},2000)
 	})

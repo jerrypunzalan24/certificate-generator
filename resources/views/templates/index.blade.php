@@ -26,6 +26,7 @@
 	<div class ='row'>
 		<div class ='col-md-4'>
 			<div class ='row' style ='margin-top:50px'>
+				{{ csrf_field() }}
 				<div class ='form-group' style ='width:100%'>
 					<label>Placeholder text</label>
 					<input type ='text' name ='input' class ='form-control'>
@@ -86,7 +87,7 @@
 			</div>
 		</div>
 		<div class ='col-md-8' >
-			<iframe src = '/attendance-system/generate/?id=76' style ='width:100%;height:100%'>
+			<iframe src = '/edit' style ='width:100%;height:100%'>
 			</iframe> 
 		</div>
 	</div>
@@ -105,8 +106,9 @@
 		var align = $('select[name=align]').val() || 'L'
 		var formData = new FormData();
 		formData.append("files",$('input[name=filelist]')[0].files[0])
+		formData.append("_token", $('input[name=_token]').val())
 		$.ajax({
-			url:"get_text.php",
+			url:"/gettext",
 			type: "POST",
 			data: formData,
 			processData: false,
@@ -114,7 +116,7 @@
 			success:function(data){
 				location = data.split('\n')[0]
 				querystr += `&input=${text}&text_x=${text_x}&text_y=${text_y}&font=${font}&location=${location}&fontsize=${fontsize}&align=${align}`
-				$('iframe').attr('src',`/attendance-system/generate/?${querystr}`)
+				$('iframe').attr('src',`/edit?${querystr}`)
 				$( 'iframe' ).attr( 'src', function ( i, val ) { return val; })
 			}
 		})

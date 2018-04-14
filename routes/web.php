@@ -15,5 +15,11 @@ Route::get('/', 'HomeController@index');
 Route::get('/register','RegisterController@index');
 Route::post('/addparticipant', 'AjaxController@addparticipant');
 Route::get('/templates', 'TemplateController@index');
+// Generate Certificates, and reports
 Route::get('/edit', 'GenerateController@edit');
-Route::get('/generate/{id}','GenerateController@view');
+Route::post('/gettext','GenerateController@gettext');
+Route::get('/generate/{id}','GenerateController@view')->where('id','[0-9]+|all');
+Route::get('/reports','GenerateController@reports');
+//Participants page
+Route::get('/participants', 'ParticipantsController@index');
+Route::get('/getparticipants', 'ParticipantsController@getparticipants');

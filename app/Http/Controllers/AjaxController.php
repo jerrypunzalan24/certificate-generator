@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Sessions;
 class AjaxController extends Controller
 {
 	private function ucwords_new(array $arr){
@@ -23,19 +24,5 @@ class AjaxController extends Controller
 				");
 		}
 	}
-	public function gettext(Request $request){
-			$file = file_get_contents($_FILES['files']['tmp_name']);
 
-		if(isset($_POST['save'])){
-			$_SESSION['location'] = explode(PHP_EOL, $file)[0];
-			$_SESSION['x'] = $_POST['x'];
-			$_SESSION['y'] = $_POST['y'];
-			$_SESSION['fontsize'] = $_POST['fontsize'];
-			$_SESSION['font'] = $_POST['font'];
-			$_SESSION['align'] = $_POST['align'];
-		}
-		else{
-			echo $file;
-		}
-	}
 }

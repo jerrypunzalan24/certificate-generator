@@ -133,14 +133,16 @@
 		formData.append("x", $('input[name=text_x]').val() || 0)
 		formData.append("y",$('input[name=text_y]').val() || 0)
 		formData.append("align",$('input[name=align]').val() || 'L')
+		formData.append("_token", $('input[name=_token]').val())
 		$.ajax({
-			url:"get_text.php",
+			url:"/gettext",
 			type:"POST",
 			processData: false,
 			contentType: false,
 			data: formData,
 			success:function(html){
 				$('#success').modal('show')
+				console.log(html);
 			}
 		})
 	})

@@ -127,6 +127,7 @@ button:hover{
 			console.log(html) 
 				$('#modal-title').html(`Welcome, ${$('input[name=fname]').val()}`)
 				$('input').val("") 
+				console.log(html)
 			},
 			error: function(html){
 				console.log(html)

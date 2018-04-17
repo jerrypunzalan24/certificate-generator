@@ -29,7 +29,7 @@ sup{
 						<h4 class ='header' style ='margin-top:5px'>Registered Participants</h4>
 					</div>
 					<div class = 'col-md-2' style ='padding-right:1px'>
-						<a href = '/generatereport' class ='btn btn-success btn-block'>View reports</a>
+						<a href = '/reports' class ='btn btn-success btn-block'>View reports</a>
 					</div>
 					<div class = 'col-md-2' style ='padding-left:5px'>
 						<a href = '/generate/all' class ='btn btn-success btn-block'>Print all</a>

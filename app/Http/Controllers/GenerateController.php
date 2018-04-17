@@ -5,11 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Facades\Fpdf;
 use Illuminate\Support\Facades\DB;
+use Session;
 class GenerateController extends Controller
 {
 	public function gettext(Request $request){
 		$file = file_get_contents($request->file('files'));
-		return $file;
+		if($request->has('save')){ 
+			$request->session()->put('location', explode(PHP_EOL, $file)[0]);
+			$request->session()->put('x',$request->input('x'));
+			$request->session()->put('y', $request->input('y'));
+			$request->session()->put('fontsize', $request->input('fontsize'));
+			$request->session()->put('font',  $request->input('font'));
+			$request->session()->put('align', $request->input('align'));
+			echo print_r($request->session()->all());
+		}
+		else{
+			echo $file;
+		}
 	}
 	public function edit(Request $request){
 		if (count($request->all()) != 0){
@@ -64,10 +76,10 @@ class GenerateController extends Controller
 		Fpdf::Output();
 	}
 	public function view($id, Request $request){
-		$location = session('location') ?? "cert-tondohighschool";
-		$align = session('align') ?? "C";
-		$x = session('x') ?? 5;
-		$y = session('y') ?? 107;
+		$location = $request->session()->get('location') ?? "cert-tondohighschool";
+		$align = $request->session()->get('align') ?? "C";
+		$x = $request->session()->get('x') ?? 5;
+		$y = $request->session()->get('y') ?? 107;
 		if($id != 'all'){
 			$result = \DB::select("SELECT * FROM data WHERE id = {$id}");
 			Fpdf::AddPage("L");
@@ -79,9 +91,10 @@ class GenerateController extends Controller
 			Fpdf::SetXY(intval($x),intval($y));
 			Fpdf::CellFitSpace(0,10,$fullname,0,1,$align);
 			Fpdf::Ln(1);	
+
 		}
 		else{
-			$results = \DB::select('SELECT * FROM data ORDER BY id DESC');
+			$results = \DB::select("SELECT * FROM data");
 			foreach($results as $result){
 				Fpdf::AddPage("L");
 				Fpdf::setDPI(60);
@@ -93,9 +106,7 @@ class GenerateController extends Controller
 				Fpdf::CellFitSpace(0,10,$fullname,0,1,$align);
 				Fpdf::Ln(1);
 			}
-
-			Fpdf::Output();
 		}
-
+		Fpdf::Output();
 	}
 }

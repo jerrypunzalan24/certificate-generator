@@ -87,10 +87,10 @@ button:hover{
 					</div>
 					<div class ='row'>
 						<div class ='col-md-8'>
-						<div class ='form-group'>
-							<label class ='lead' >School<sup>*</sup></label>
-							<input type = 'text'	placeholder = 'School'class ='form-control' pattern = "[a-zA-Z\s\.]+[a-zA-Z\.]*$" name ='school' REQUIRED/>
-						</div>
+							<div class ='form-group'>
+								<label class ='lead' >School<sup>*</sup></label>
+								<input type = 'text'	placeholder = 'School'class ='form-control' pattern = "[a-zA-Z\s\.]+[a-zA-Z\.]*$" name ='school' REQUIRED/>
+							</div>
 						</div>
 						<div class ='col-md-4'>
 							<div class ='form-group'>
@@ -102,9 +102,25 @@ button:hover{
 							</div>
 						</div>
 					</div>
-					<div class ='form-group'>
-						<label class ='lead' >Email (Optional)</label>
-						<input type = 'email'	placeholder = 'Email address (Use Gmail)' class ='form-control' name ='email'/>
+					<div class ='row'>
+						<div class ='col-md-6'>
+							<div class ='form-group'>
+								<label class ='lead' >Email (Optional)</label>
+								<input type = 'email'	placeholder = 'Email address (Use Gmail)' class ='form-control' name ='email'/>
+							</div>
+						</div>
+						<div class ='col-md-6'>
+							<div class ='form-group'>
+								<label class ='lead'>Role</label>
+								<select class ='form-control' name ='role'>
+									<option selected value ='stud-facilitator'>Student facilitator</option>
+									<option value ='participant'>Participant</option>
+									<option value ='speaker'>Speaker</option>
+									<option value ='committee-chair'>Committee chair</option>
+									<option value ='facilitator'>Facilitator</option>
+								</select>
+							</div>
+						</div>
 					</div>
 					<input type ='hidden' name ='submit'/>
 					<button type ='submit'  class ='btn btn-primary btn-fill btn-block' style ='background-color: #00b11b; border-color:#00b11b'>Submit</button>
@@ -124,7 +140,7 @@ button:hover{
 			type: 'POST',
 			data: $(this).serialize(),
 			success:function(html){	
-			console.log(html) 
+				console.log(html) 
 				$('#modal-title').html(`Welcome, ${$('input[name=fname]').val()}`)
 				$('input').val("") 
 				console.log(html)

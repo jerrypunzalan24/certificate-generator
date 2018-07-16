@@ -46,8 +46,7 @@ sup{
 		</div>
 	</div>
 </body>
-<script src = '../js/jquery/jquery-3.2.1.min.js'></script>
-<script src ='../js/bootstrap.min.js'></script>
+@include('includes.scripts')
 <script>
 	$(document).ready(function(){
 		var autoupdate = true

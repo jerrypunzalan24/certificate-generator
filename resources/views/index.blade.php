@@ -1,17 +1,4 @@
-<title>Certificate!!</title>
-<head>
-	<link rel = 'stylesheet' href ='css/bootstrap.min.css'/>
-	<link rel = 'stylesheet' href ='css/styles.css'/>
-
-</head>
-<style>
-body{
-	background-image:url(assets/images/abstract-geometric-pattern-background_1319-242.jpg);
-}
-img {
-    image-orientation: from-image;
-}
-</style>
+@include("includes.styles")
 <div class ='container' style ='margin-top:5%'>
 	<div class ='card' align ='center'>
 		<div style ='padding:10px'>
@@ -67,6 +54,4 @@ img {
 	</div>
 </div>
 
-<script src = 'js/jquery/jquery-3.2.1.min.js'></script>
-<script src ='js/bootstrap.min.js'></script>
-<script src ='js/js-cookie-master/js.cookie.js'></script>
+@include("includes.scripts")

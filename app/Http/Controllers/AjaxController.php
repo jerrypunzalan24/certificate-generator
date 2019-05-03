@@ -22,6 +22,7 @@ class AjaxController extends Controller
 			$currentDay = date("Y-m-d H:i:s");
 			// \DB::Insert("INSERT into data(first_name, middle_initial, last_name,school,date_created, email, gender,role)VALUES('{$request->input('fname')}','{$mi}','{$request->input('lname')}', '{$school}','{$currentDay}', '{$request->input('email')}', {$request->input('gender')}, '{$request->input('role')}')
 			// 	");
+			try{
 			\DB::table('data')->insert([
 				'first_name' => $request->input('fname'),
 				'middle_initial' => $mi,
@@ -32,6 +33,9 @@ class AjaxController extends Controller
 				'gender' => $request->input('gender'),
 				'role' => $request->input('role')
 			]);
+			}catch(Exception $e){
+				echo $e;
+			}
 		}
 	}
 

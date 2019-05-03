@@ -147,6 +147,7 @@ button:hover{
 			},
 			error: function(html){
 				console.log(html)
+				$('#modal-title').html(html)
 			}
 		})
 	})

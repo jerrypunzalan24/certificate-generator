@@ -1,5 +1,8 @@
 <?php
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +26,15 @@ Route::get('/reports','GenerateController@reports');
 //Participants page
 Route::get('/participants', 'ParticipantsController@index');
 Route::get('/getparticipants', 'ParticipantsController@getparticipants');
+Route::get('/sample', function(Request $request){
+	\DB::table('data')->insert([
+		'first_name' => "hahhahhah",
+		'middle_initial' => "sd",
+		'last_name' => "dsadasdad",
+		'school' => "asdasdasd",
+		'date' => '',
+		'email' => 'asdasd',
+		'gender' => 1,
+		'role' => 'asd'
+	]);
+});

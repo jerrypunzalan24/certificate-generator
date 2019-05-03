@@ -88,8 +88,7 @@ class GenerateController extends Controller
 			$fpdf = new FPDF();
 			$fpdf->AddPage("L");
 			$fpdf->setDPI(60);
-			$fpdf->AddFont('Opensans', '' , 'OpenSans-Semibold.php');
-			$fpdf->SetFont('Opensans','','44');
+			$fpdf->SetFont('Arial','','44');
 			$fpdf->centreImage("./assets/images/{$location}/cert-{$result[0]->role}.jpg");
 			$fullname = ucwords("{$result[0]->first_name} {$result[0]->middle_initial} {$result[0]->last_name}");
 			$fpdf->SetXY(intval($x),intval($y));
@@ -102,8 +101,7 @@ class GenerateController extends Controller
 			foreach($results as $result){
 				$fpdf->AddPage("L");
 				$fpdf->setDPI(60);
-				$fpdf->AddFont('Opensans', '' , 'OpenSans-Semibold.php');
-				$fpdf->SetFont('Opensans','','44');
+				$fpdf->SetFont('Arial','','44');
 				$fpdf->centreImage("./assets/images/{$location}/cert-{$result->role}.jpg");
 				$fullname = ucwords("{$result->first_name} {$result->middle_initial} {$result->last_name}");
 				$fpdf->SetXY(intval($x),intval($y));

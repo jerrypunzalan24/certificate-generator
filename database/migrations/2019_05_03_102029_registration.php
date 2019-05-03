@@ -13,7 +13,7 @@ class Registration extends Migration
      */
     public function up()
     {
-        Schema::table('data', function($table){
+        Schema::create('data', function($table){
             $table->increments('id');
             $table->string('first_name',25);
             $table->string('middle_initial',3);

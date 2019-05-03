@@ -31,7 +31,7 @@ Route::get('/sample', function(Request $request){
 		'middle_initial' => "sd",
 		'last_name' => "dsadasdad",
 		'school' => "asdasdasd",
-		'date' => '',
+		'date_created' => '',
 		'email' => 'asdasd',
 		'gender' => 1,
 		'role' => 'asd'

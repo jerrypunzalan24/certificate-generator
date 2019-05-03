@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Codedge\Fpdf\Facades\Fpdf;
+use App\Classes\FPDF;
 use Illuminate\Support\Facades\DB;
 use Session;
 class GenerateController extends Controller
@@ -25,55 +25,55 @@ class GenerateController extends Controller
 	}
 	public function edit(Request $request){
 		if (count($request->all()) != 0){
-			Fpdf::AddPage("L");
-			Fpdf::setDPI(60);
-			Fpdf::Addfont('Courier','',$request->input('font'));
-			Fpdf::SetFont('Courier','',$request->input('fontsize'));
-			Fpdf::SetXY($request->input('text_x') ?? 0, $request->input('text_y') ?? 0);
-			Fpdf::centreImage("./assets/images/{$request->input('location')}/cert-speaker.jpg");
-			Fpdf::Cell(0,10,$request->input('input') ?? "", 0,1,$request->input('align'));
-			Fpdf::Output();
+			FPDF::AddPage("L");
+			FPDF::setDPI(60);
+			FPDF::Addfont('Courier','',$request->input('font'));
+			FPDF::SetFont('Courier','',$request->input('fontsize'));
+			FPDF::SetXY($request->input('text_x') ?? 0, $request->input('text_y') ?? 0);
+			FPDF::centreImage("./assets/images/{$request->input('location')}/cert-speaker.jpg");
+			FPDF::Cell(0,10,$request->input('input') ?? "", 0,1,$request->input('align'));
+			FPDF::Output();
 		}
 	}
 	public function reports(){
 		date_default_timezone_set("Asia/Manila");
 		$currentday = date("F d, Y");
 		$query = \DB::select("SELECT * FROM data ORDER BY id DESC");
-		Fpdf::AddPage("P");
-		Fpdf::Image('./assets/images/rnd-logo.png',94,10,20);
-		Fpdf::SetFont("Arial",'B','20');
-		Fpdf::SetY(33);
-		Fpdf::SetX(35);
-		Fpdf::Write(5,"CCSS R&D Certifcate Generator System");
-		Fpdf::Ln();
-		Fpdf::SetFont("Arial",'B','14');
-		Fpdf::SetY(43);
-		Fpdf::SetX(65);
-		Fpdf::Write(5,"Report generated: {$currentday}", 0,1,'C');
-		Fpdf::Ln();
-		Fpdf::Ln();
-		Fpdf::SetY(53);
-		Fpdf::SetX(81);
-		Fpdf::Write(5,"List of participants:", 0,1,'C');
-		Fpdf::Ln();
-		Fpdf::Ln();
-		Fpdf::SetFont("Arial",'B','12');
-		Fpdf::Cell(60,10,"Full name",1);
-		Fpdf::Cell(60,10,"School",1);
-		Fpdf::Cell(70,10,"Email",1);
-		Fpdf::Ln();
-		Fpdf::SetFont("Arial",'','12');
+		FPDF::AddPage("P");
+		FPDF::Image('./assets/images/rnd-logo.png',94,10,20);
+		FPDF::SetFont("Arial",'B','20');
+		FPDF::SetY(33);
+		FPDF::SetX(35);
+		FPDF::Write(5,"CCSS R&D Certifcate Generator System");
+		FPDF::Ln();
+		FPDF::SetFont("Arial",'B','14');
+		FPDF::SetY(43);
+		FPDF::SetX(65);
+		FPDF::Write(5,"Report generated: {$currentday}", 0,1,'C');
+		FPDF::Ln();
+		FPDF::Ln();
+		FPDF::SetY(53);
+		FPDF::SetX(81);
+		FPDF::Write(5,"List of participants:", 0,1,'C');
+		FPDF::Ln();
+		FPDF::Ln();
+		FPDF::SetFont("Arial",'B','12');
+		FPDF::Cell(60,10,"Full name",1);
+		FPDF::Cell(60,10,"School",1);
+		FPDF::Cell(70,10,"Email",1);
+		FPDF::Ln();
+		FPDF::SetFont("Arial",'','12');
 		foreach($query as $q){
 			$lastname = strtoupper($q->last_name);
 			$firstname = ucwords($q->first_name);
 			$middle_initial = strtoupper($q->middle_initial);
-			Fpdf::CellFitScale(60,10, "{$lastname}, {$firstname} {$middle_initial}",1);
-			Fpdf::CellFitScale(60,10, "{$q->school}",1);
+			FPDF::CellFitScale(60,10, "{$lastname}, {$firstname} {$middle_initial}",1);
+			FPDF::CellFitScale(60,10, "{$q->school}",1);
 			$email = ($q->email =='') ? 'None' : $q->email;
-			Fpdf::CellFitScale(70,10,$email,1);
-			Fpdf::Ln();
+			FPDF::CellFitScale(70,10,$email,1);
+			FPDF::Ln();
 		}
-		Fpdf::Output();
+		FPDF::Output();
 	}
 	public function view($id, Request $request){
 		$location = $request->session()->get('location') ?? "cert-tondohighschool";
@@ -82,31 +82,31 @@ class GenerateController extends Controller
 		$y = $request->session()->get('y') ?? 107;
 		if($id != 'all'){
 			$result = \DB::select("SELECT * FROM data WHERE id = {$id}");
-			Fpdf::AddPage("L");
-			Fpdf::setDPI(60);
-			Fpdf::AddFont('Opensans', '' , 'OpenSans-Semibold.php');
-			Fpdf::SetFont('Opensans','','44');
-			Fpdf::centreImage("./assets/images/{$location}/cert-{$result[0]->role}.jpg");
+			FPDF::AddPage("L");
+			FPDF::setDPI(60);
+			FPDF::AddFont('Opensans', '' , 'OpenSans-Semibold.php');
+			FPDF::SetFont('Opensans','','44');
+			FPDF::centreImage("./assets/images/{$location}/cert-{$result[0]->role}.jpg");
 			$fullname = ucwords("{$result[0]->first_name} {$result[0]->middle_initial} {$result[0]->last_name}");
-			Fpdf::SetXY(intval($x),intval($y));
-			Fpdf::CellFitSpace(0,10,$fullname,0,1,$align);
-			Fpdf::Ln(1);	
+			FPDF::SetXY(intval($x),intval($y));
+			FPDF::CellFitSpace(0,10,$fullname,0,1,$align);
+			FPDF::Ln(1);	
 
 		}
 		else{
 			$results = \DB::select("SELECT * FROM data");
 			foreach($results as $result){
-				Fpdf::AddPage("L");
-				Fpdf::setDPI(60);
-				Fpdf::AddFont('Opensans', '' , 'OpenSans-Semibold.php');
-				Fpdf::SetFont('Opensans','','44');
-				Fpdf::centreImage("./assets/images/{$location}/cert-{$result->role}.jpg");
+				FPDF::AddPage("L");
+				FPDF::setDPI(60);
+				FPDF::AddFont('Opensans', '' , 'OpenSans-Semibold.php');
+				FPDF::SetFont('Opensans','','44');
+				FPDF::centreImage("./assets/images/{$location}/cert-{$result->role}.jpg");
 				$fullname = ucwords("{$result->first_name} {$result->middle_initial} {$result->last_name}");
-				Fpdf::SetXY(intval($x),intval($y));
-				Fpdf::CellFitSpace(0,10,$fullname,0,1,$align);
-				Fpdf::Ln(1);
+				FPDF::SetXY(intval($x),intval($y));
+				FPDF::CellFitSpace(0,10,$fullname,0,1,$align);
+				FPDF::Ln(1);
 			}
 		}
-		Fpdf::Output();
+		FPDF::Output();
 	}
 }

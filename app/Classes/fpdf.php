@@ -1937,7 +1937,7 @@ protected function _putresources()
 
 protected function _putinfo()
 {
-	$this->metadata['Producer'] = 'FPDF '.FPDF_VERSION;
+	$this->metadata['Producer'] = 'FPDF ';
 	$this->metadata['CreationDate'] = 'D:'.@date('YmdHis');
 	foreach($this->metadata as $key=>$value)
 		$this->_put('/'.$key.' '.$this->_textstring($value));

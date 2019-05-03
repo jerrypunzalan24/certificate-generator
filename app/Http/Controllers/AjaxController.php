@@ -28,7 +28,7 @@ class AjaxController extends Controller
 				'middle_initial' => $mi,
 				'last_name' => $request->input('lname'),
 				'school' => $school,
-				'date' => $currentDay,
+				'date_created' => $currentDay,
 				'email' => $request->input('email'),
 				'gender' => $request->input('gender'),
 				'role' => $request->input('role')

@@ -83,9 +83,10 @@ class GenerateController extends Controller
 		$align = $request->session()->get('align') ?? "C";
 		$x = $request->session()->get('x') ?? 5;
 		$y = $request->session()->get('y') ?? 107;
+		$fpdf = new FPDF();
 		if($id != 'all'){
 			$result = \DB::select("SELECT * FROM data WHERE id = {$id}");
-			$fpdf = new FPDF();
+
 			$fpdf->AddPage("L");
 			$fpdf->setDPI(60);
 			$fpdf->SetFont('Arial','','44');
